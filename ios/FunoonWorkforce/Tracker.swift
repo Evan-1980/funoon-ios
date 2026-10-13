@@ -62,7 +62,9 @@ final class Tracker: NSObject, ObservableObject, CLLocationManagerDelegate {
             let r = try await API.send("pair",method: "POST",body: ["proofHash":SecureStore.hash(secret),"label":UIDevice.current.model,"platform":"ios"])
             guard let id = r["pairId"] as? String, let code = r["code"] as? String, let expiry = API.date(r["expiresAt"] as? String ?? ""),let url = URL(string: r["verificationUrl"] as? String ?? ""),url.scheme == "https",url.host == Configuration.origin.host else { throw APIError(status: 502,message: "تعذر فتح صفحة ربط الهاتف") }
             pairCode = stride(from: 0,to: code.count,by: 4).map { String(code.dropFirst($0).prefix(4)) }.joined(separator: "-")
-            verificationURL = url;busy = false;UIApplication.shared.open(url)
+            verificationURL = url
+            busy = false
+            await UIApplication.shared.open(url)
             pairTask = Task { [weak self] in
                 while !Task.isCancelled && Date() < expiry {
                     do {
