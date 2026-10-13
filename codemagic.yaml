@@ -1,0 +1,28 @@
+workflows:
+  ios-verify:
+    name: Funoon iOS - compile without signing
+    instance_type: mac_mini_m2
+    max_build_duration: 30
+    environment:
+      xcode: latest
+    scripts:
+    - name: Compile the iPhone project for the simulator
+      script: "if [ -f mobile/scripts/ios-cloud-build.sh ]; then\n  bash mobile/scripts/ios-cloud-build.sh\
+        \ verify\nelse\n  bash scripts/ios-cloud-build.sh verify\nfi\n"
+    artifacts:
+    - build/ios/FunoonWorkforce-Simulator.zip
+    - build/ios/*.log
+  ios-unsigned-device:
+    name: Funoon iPhone - unsigned device IPA for local signing
+    instance_type: mac_mini_m2
+    max_build_duration: 30
+    environment:
+      xcode: latest
+    scripts:
+    - name: Build a physical iPhone IPA without Apple signing credentials
+      script: "if [ -f mobile/scripts/ios-cloud-build.sh ]; then\n  bash mobile/scripts/ios-cloud-build.sh\
+        \ unsigned-device\nelse\n  bash scripts/ios-cloud-build.sh unsigned-device\n\
+        fi\n"
+    artifacts:
+    - build/ios/ipa/FunoonWorkforce-Unsigned.ipa
+    - build/ios/device-build.log
