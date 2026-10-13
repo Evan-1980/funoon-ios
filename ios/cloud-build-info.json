@@ -1,0 +1,28 @@
+{
+  "sourceVersion": "1.1.1",
+  "preparedAtUTC": "2026-10-13",
+  "minimumIOS": "16.0",
+  "bundleIdentifier": "com.funoon.workforce",
+  "serverOrigin": "https://funoon-workforce.evan80.chatgpt.site",
+  "provider": "Codemagic",
+  "verificationWorkflow": "ios-verify",
+  "signedWorkflow": "ios-ipa-testflight",
+  "sourceInputsValidated": true,
+  "cloudBuildExecuted": false,
+  "iosCompiled": false,
+  "signedIPAAvailable": false,
+  "physicalDeviceTested": false,
+  "nativeFeatures": [
+    "account pairing",
+    "consented on-shift location sharing",
+    "local task reminders"
+  ],
+  "webFeaturesOpenedInSafari": [
+    "attendance and selfie",
+    "leave",
+    "tasks",
+    "administration"
+  ],
+  "unsignedDeviceWorkflow": "ios-unsigned-device",
+  "unsignedDeviceIPAAvailable": false
+}
